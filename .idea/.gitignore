@@ -1,0 +1,11 @@
+# Ignore all files in this folder
+/.*
+# Ignore all subfolders and all files in all subfolders
+/**/*.*
+/**/
+
+# Choose fiels to share
+!/.gitignore
+!/inspectionProfiles/custom.xml
+!/codeStyleSettings.xml
+!/inspectionProfiles/profiles_settings.xml
