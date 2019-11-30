@@ -10,4 +10,4 @@ Server side of application. Used technologies:
 * Using Maven Command: `mvn spring-boot:run`
 * Using Executable JAR:
 `mvn clean package`
-`java -jar target/spring-boot-demo-0.0.1-SNAPSHOT.jar`
+`java -jar target/spring-rest-server-*.jar`

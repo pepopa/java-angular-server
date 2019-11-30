@@ -1,0 +1,13 @@
+
+DOCS:
+  * servless architecture - AWS Lambda, Google Cloud Functions, or Azure Functions.
+  * CIRCLE CI or Jenkins - https://circleci.com/
+  
+
+- finish 1 service
+- deployment
+  * host application on Firebase or Heroku
+  
+
+FINAL optimization:
+  * CloudFlare - DNS, load balancing, SSL and DDoS protection https://www.cloudflare.com/

@@ -1,7 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <settings>
-    <option name="PROJECT_PROFILE" value="PM1" />
-    <option name="USE_PROJECT_PROFILE" value="true" />
+    <option name="projectProfile" value="custom" />
+    <option name="PROJECT_PROFILE" value="custom" />
     <version value="1.0" />
     <info color="eb9d85">
       <option name="BACKGROUND" value="ebc700" />
@@ -17,7 +17,7 @@
     </info>
     <list size="8">
       <item index="0" class="java.lang.String" itemvalue="CHECKSTYLE" />
-      <item index="1" class="java.lang.String" itemvalue="UNUSED ENTRY" />
+      <item index="1" class="java.lang.String" itemvalue="INFORMATION" />
       <item index="2" class="java.lang.String" itemvalue="TYPO" />
       <item index="3" class="java.lang.String" itemvalue="SERVER PROBLEM" />
       <item index="4" class="java.lang.String" itemvalue="INFO" />
