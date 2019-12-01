@@ -21,6 +21,18 @@
     <version>2.2.1.RELEASE</version>
   </parent>
 
+  <!--<dependencyManagement>-->
+  <!--<dependencies>-->
+  <!--<dependency>-->
+  <!--<groupId>org.springframework.data</groupId>-->
+  <!--<artifactId>spring-data-releasetrain</artifactId>-->
+  <!--<version>Hopper-SR10</version>-->
+  <!--<type>pom</type>-->
+  <!--<scope>import</scope>-->
+  <!--</dependency>-->
+  <!--</dependencies>-->
+  <!--</dependencyManagement>-->
+
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
     <dependency>
@@ -42,12 +54,23 @@
       <version>2.1.8.RELEASE</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.mindrot</groupId>
       <artifactId>jbcrypt</artifactId>
       <version>0.3m</version>
     </dependency>
+    <!-- Amazon DynamoDB -->
+    <!--<dependency>-->
+    <!--<groupId>com.amazonaws</groupId>-->
+    <!--<artifactId>aws-java-sdk-dynamodb</artifactId>-->
+    <!--<version>1.11.34</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>com.github.derjust</groupId>-->
+    <!--<artifactId>spring-data-dynamodb</artifactId>-->
+    <!--<version>4.3.1</version>-->
+    <!--</dependency>-->
+
     <!-- dependencies for unit testing -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -70,4 +93,9 @@
       </plugin>
     </plugins>
   </build>
+
+  <properties>
+    <!-- TODO extract to BOM module and use properties -->
+    <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
+  </properties>
 </project>

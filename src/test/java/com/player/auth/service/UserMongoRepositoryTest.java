@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import com.player.auth.entity.User;
+import com.player.auth.entity.UserMongo;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,15 +16,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryTest {
+public class UserMongoRepositoryTest {
 
   @Autowired
-  private UserRepository userMongoRepository;
+  private UserMongoRepository userMongoRepository;
 
   @Before
   public void setUp() throws Exception {
-    User user1 = new User("Alice", 23);
-    User user2 = new User("Bob", 38);
+    this.userMongoRepository.deleteAll();
+    UserMongo user1 = new UserMongo("Alice", 23);
+    UserMongo user2 = new UserMongo("Bob", 38);
     //save product, verify has ID value after save
     assertNull(user1.getId());
     assertNull(user2.getId());//null before save
@@ -37,13 +38,13 @@ public class UserRepositoryTest {
   @Test
   public void testFetchData() {
         /*Test data retrieval*/
-    User userA = userMongoRepository.findByFirstName("Bob");
+    UserMongo userA = userMongoRepository.findByFirstName("Bob");
     assertNotNull(userA);
     assertEquals(38, userA.getAge());
         /*Get all products, list should only have two*/
-    Iterable<User> users = userMongoRepository.findAll();
+    Iterable<UserMongo> users = userMongoRepository.findAll();
     int count = 0;
-    for (User p : users) {
+    for (UserMongo p : users) {
       count++;
     }
     assertEquals(2, count);
@@ -52,10 +53,10 @@ public class UserRepositoryTest {
   @Test
   public void testDataUpdate() {
         /*Test update*/
-    User userB = userMongoRepository.findByFirstName("Bob");
+    UserMongo userB = userMongoRepository.findByFirstName("Bob");
     userB.setAge(40);
     userMongoRepository.save(userB);
-    User userC = userMongoRepository.findByFirstName("Bob");
+    UserMongo userC = userMongoRepository.findByFirstName("Bob");
     assertNotNull(userC);
     assertEquals(40, userC.getAge());
   }

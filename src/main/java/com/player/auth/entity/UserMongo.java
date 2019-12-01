@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
-public class User {
+public class UserMongo implements IUser {
 
   @Id
   private String id;
@@ -14,12 +14,20 @@ public class User {
   private String password;
   private int age;
 
-  public User() {
+  public UserMongo() {
   }
 
-  public User(String firstName, int age) {
+  public UserMongo(String firstName, int age) {
     this.firstName = firstName;
     this.age = age;
+  }
+
+  public UserMongo(IUser user) {
+    this.email = user.getEmail();
+    this.firstName = user.getFirstName();
+    this.lastName = user.getLastName();
+    this.password = user.getPassword();
+    this.age = user.getAge();
   }
 
   public String getId() {
@@ -30,6 +38,7 @@ public class User {
     this.id = id;
   }
 
+  @Override
   public String getEmail() {
     return email;
   }
@@ -38,6 +47,7 @@ public class User {
     this.email = email;
   }
 
+  @Override
   public String getFirstName() {
     return firstName;
   }
@@ -46,6 +56,7 @@ public class User {
     this.firstName = firstName;
   }
 
+  @Override
   public String getLastName() {
     return lastName;
   }
@@ -54,6 +65,7 @@ public class User {
     this.lastName = lastName;
   }
 
+  @Override
   public String getPassword() {
     return password;
   }
@@ -62,6 +74,7 @@ public class User {
     this.password = password;
   }
 
+  @Override
   public int getAge() {
     return age;
   }
@@ -79,7 +92,7 @@ public class User {
       return false;
     }
 
-    User user = (User)o;
+    UserMongo user = (UserMongo)o;
 
     if (age != user.age) {
       return false;
@@ -112,7 +125,7 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{" +
+    return "UserMongo{" +
         "id='" + id + '\'' +
         ", email='" + email + '\'' +
         ", firstName='" + firstName + '\'' +
