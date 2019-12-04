@@ -1,10 +1,12 @@
 package com.player.auth.service;
 
 import com.player.auth.entity.IUser;
-import com.player.auth.entity.UserMongo;
+import com.player.auth.entity.User;
+import com.player.auth.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,31 +15,19 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
   @Autowired
-  private UserMongoRepository userMongoRepository;
+  private UserRepository userRepository;
 
   public IUser findByEmail(String email) {
-    return findByEmailMongo(email);
-  }
-
-  private UserMongo findByEmailMongo(String email) {
-    return userMongoRepository.findByEmail(email);
+    return userRepository.findByEmail(email);
   }
 
   public List<String> getAllEmails() {
-    return getAllEmailsMongo();
-  }
-
-  private List<String> getAllEmailsMongo() {
-    return userMongoRepository.findAll().stream()
-        .map(UserMongo::getEmail)
+    return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+        .map(User::getEmail)
         .collect(Collectors.toList());
   }
 
   public IUser saveUser(IUser user) {
-    return userMongoRepository.save(new UserMongo(user));
-  }
-
-  private IUser saveUserMongo(IUser user) {
-    return userMongoRepository.save(new UserMongo(user));
+    return userRepository.save(new User(user));
   }
 }

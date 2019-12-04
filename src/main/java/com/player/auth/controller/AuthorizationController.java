@@ -2,7 +2,6 @@ package com.player.auth.controller;
 
 import com.player.auth.dto.UserDto;
 import com.player.auth.entity.IUser;
-import com.player.auth.entity.UserMongo;
 import com.player.auth.service.UserService;
 import com.player.constants.ApplicationConstants;
 
@@ -68,7 +67,7 @@ public class AuthorizationController {
   }
 
   @PostMapping("users")
-  public ResponseEntity<UserDto> register(@RequestBody UserMongo user) {
+  public ResponseEntity<UserDto> register(@RequestBody UserDto user) {
     // TODO PPA - BCrypt.hashpw(password_from_user, BCrypt.gensalt());
     userService.saveUser(user);
     return new ResponseEntity<>(new UserDto(user), HttpStatus.OK);

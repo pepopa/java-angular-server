@@ -6,14 +6,9 @@
   <artifactId>java-rest-server</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
+
   <name>java-rest-server</name>
   <description>Java Spring Boot REST server</description>
-
-  <properties>
-    <java.version>1.8</java.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -21,17 +16,18 @@
     <version>2.2.1.RELEASE</version>
   </parent>
 
-  <!--<dependencyManagement>-->
-  <!--<dependencies>-->
-  <!--<dependency>-->
-  <!--<groupId>org.springframework.data</groupId>-->
-  <!--<artifactId>spring-data-releasetrain</artifactId>-->
-  <!--<version>Hopper-SR10</version>-->
-  <!--<type>pom</type>-->
-  <!--<scope>import</scope>-->
-  <!--</dependency>-->
-  <!--</dependencies>-->
-  <!--</dependencyManagement>-->
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring.boot-test.version>2.2.1.RELEASE</spring.boot-test.version>
+    <spring-test.version>5.1.9.RELEASE</spring-test.version>
+    <jbcrypt.version>0.3m</jbcrypt.version>
+    <junit5.version>5.4.0</junit5.version>
+    <junit4.version>4.12</junit4.version>
+    <mockito.version>2.25.0</mockito.version>
+    <commons-lang3.version>3.9</commons-lang3.version>
+  </properties>
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
@@ -41,46 +37,52 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-mongodb</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-test</artifactId>
-      <version>2.1.8.RELEASE</version>
+      <version>${spring.boot-test.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Mongo DB -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+
+    <!-- utils & misc -->
     <dependency>
       <groupId>org.mindrot</groupId>
       <artifactId>jbcrypt</artifactId>
-      <version>0.3m</version>
+      <version>${jbcrypt.version}</version>
     </dependency>
-    <!-- Amazon DynamoDB -->
-    <!--<dependency>-->
-    <!--<groupId>com.amazonaws</groupId>-->
-    <!--<artifactId>aws-java-sdk-dynamodb</artifactId>-->
-    <!--<version>1.11.34</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>com.github.derjust</groupId>-->
-    <!--<artifactId>spring-data-dynamodb</artifactId>-->
-    <!--<version>4.3.1</version>-->
-    <!--</dependency>-->
 
     <!-- dependencies for unit testing -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>5.1.9.RELEASE</version>
+      <version>${spring-test.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <version>${junit4.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -93,9 +95,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <properties>
-    <!-- TODO extract to BOM module and use properties -->
-    <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
-  </properties>
 </project>

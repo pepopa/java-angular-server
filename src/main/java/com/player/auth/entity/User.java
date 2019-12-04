@@ -1,9 +1,12 @@
-package com.player.auth.dto;
+package com.player.auth.entity;
 
-import com.player.auth.entity.IUser;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class UserDto implements IUser {
+@Document(collection = "users")
+public class User implements IUser {
 
+  @Id
   private String id;
   private String email;
   private String firstName;
@@ -11,13 +14,20 @@ public class UserDto implements IUser {
   private String password;
   private int age;
 
-  public UserDto(IUser user) {
+  public User() {
+    // empty constructor - new database user
+  }
+
+  public User(IUser user) {
+    this();
     this.id = user.getId();
-    this.email = user.getEmail();
-    this.firstName = user.getFirstName();
-    this.lastName = user.getLastName();
-    this.password = user.getPassword();
-    this.age = user.getAge();
+  }
+
+  public static User create(String firstName, int age) {
+    User user = new User();
+    user.setFirstName(firstName);
+    user.setAge(age);
+    return user;
   }
 
   @Override
@@ -57,15 +67,6 @@ public class UserDto implements IUser {
   }
 
   @Override
-  public int getAge() {
-    return age;
-  }
-
-  public void setAge(int age) {
-    this.age = age;
-  }
-
-  @Override
   public String getPassword() {
     return password;
   }
@@ -75,12 +76,11 @@ public class UserDto implements IUser {
   }
 
   @Override
-  public String toString() {
-    return "UserDto{" +
-        "email='" + email + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", age=" + age +
-        '}';
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
   }
 }
