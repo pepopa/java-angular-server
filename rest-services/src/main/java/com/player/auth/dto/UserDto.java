@@ -11,6 +11,10 @@ public class UserDto implements IUser {
   private String password;
   private int age;
 
+  public UserDto() {
+
+  }
+
   public UserDto(IUser user) {
     this.id = user.getId();
     this.email = user.getEmail();

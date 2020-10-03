@@ -21,6 +21,12 @@ public class User implements IUser {
   public User(IUser user) {
     this();
     this.id = user.getId();
+    this.email = user.getEmail();
+    this.firstName = user.getFirstName();
+    this.lastName = user.getLastName();
+    this.password = user.getPassword();
+    this.age = user.getAge();
+    // TODO write unit test to check copy constructor
   }
 
   public static User create(String firstName, int age) {

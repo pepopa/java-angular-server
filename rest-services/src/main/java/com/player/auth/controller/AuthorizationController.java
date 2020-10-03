@@ -1,5 +1,6 @@
 package com.player.auth.controller;
 
+import com.mongodb.MongoClient;
 import com.player.auth.dto.UserDto;
 import com.player.auth.entity.IUser;
 import com.player.auth.service.UserService;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,22 @@ public class AuthorizationController {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private Environment env;
+
   @GetMapping("status")
   public ResponseEntity status() {
+    return ResponseEntity.ok().build();
+  }
+
+  @GetMapping("dbstatus")
+  public ResponseEntity dbstatus() {
+    try {
+      MongoClient mongo = new MongoClient();
+      mongo.getDB(env.getProperty("spring.data.mongodb.database"));
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).build();
+    }
     return ResponseEntity.ok().build();
   }
 
@@ -69,7 +85,7 @@ public class AuthorizationController {
   @PostMapping("users")
   public ResponseEntity<UserDto> register(@RequestBody UserDto user) {
     // TODO PPA - BCrypt.hashpw(password_from_user, BCrypt.gensalt());
-    userService.saveUser(user);
-    return new ResponseEntity<>(new UserDto(user), HttpStatus.OK);
+    IUser storedUser = userService.saveUser(user);
+    return new ResponseEntity<>(new UserDto(storedUser), HttpStatus.OK);
   }
 } 

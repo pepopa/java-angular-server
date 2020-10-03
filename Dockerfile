@@ -1,12 +1,17 @@
-#FROM openjdk:7
-#RUN mkdir -p opt/dynamodb
-#WORKDIR /opt/dynamodb
-#RUN wget https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz -q -O - | tar -xz
-#EXPOSE 8000
-#ENTRYPOINT ["java", "-jar", "DynamoDBLocal.jar"]
 
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-COPY target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-Dspring.data.mongodb.uri=mongodb://127.0.0.1:27017/test","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+COPY rest-services/target/*.jar app.jar
+ARG MONGO_URI="mongodb+srv://jenkins:W7bfrqdxfJbfkYx@mongodbcluster-vlunq.mongodb.net/react-web?retryWrites=true&w=majority"
+ARG MONGO_USER="jenkins"
+ARG MONGO_PASS="W7bfrqdxfJbfkYx"
+ARG MONGO_DB="react-web"
+EXPOSE 8082
+RUN echo "Using DB ${MONGO_URI}"
+ENTRYPOINT ["java", \
+  "-Dspring.data.mongodb.uri=${MONGO_URI}", \
+  "-Dspring.data.mongodb.username=${MONGO_USER}",  \
+  "-Dspring.data.mongodb.password=${MONGO_PASS}", \
+  "-Dspring.data.mongodb.database=${MONGO_DB}", \
+  "-Djava.security.egd=file:/dev/./urandom","-jar", \
+  "/app.jar"]
